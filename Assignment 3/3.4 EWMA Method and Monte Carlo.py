@@ -10,12 +10,13 @@
 # 5. Calculate portfolio weights, variance, and 99% 1-Day VaR using EWMA-based matrix
 # 6. Perform Monte Carlo Simulation to calculate Portfolio VaR
 # 7. Export the result
-
+# 8. Plot histogram of Monte Carlo simulated portfolio returns
 
 
 import pandas as pd
 import numpy as np
 from openpyxl import Workbook
+import matplotlib.pyplot as plt
 
 
 # Step 1: Imports the clean data
@@ -106,3 +107,13 @@ ws.append(["Portfolio VaR (99%)", portfolio_var])
 ws.append(["Monte Carlo VaR (99%)", monte_carlo_var])
 
 wb.save(output_file)
+
+
+# Step 8: Plot histogram of Monte Carlo simulated portfolio returns
+plt.figure(figsize=(10, 6))
+plt.hist(simulated_portfolio_returns, bins=50, color="skyblue", edgecolor="black")
+plt.title("Monte Carlo Simulated Portfolio Returns")
+plt.xlabel("Portfolio Return")
+plt.ylabel("Frequency")
+plt.grid()
+plt.show()
